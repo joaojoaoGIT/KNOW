@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel Administrativo — KNOW</title>
+<link rel="icon" href="images/logo-know.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="js/partials.js"></script>
+<script>
+const u = JSON.parse(localStorage.getItem('know_user')||'null');
+if(!u || u.role!=='admin'){ location.href='login.html'; }
+
+const leads = JSON.parse(localStorage.getItem('know_leads')||'[]');
+const users = JSON.parse(localStorage.getItem('know_users')||'[]');
+
+const byCurso = leads.reduce((a,l)=>{a[l.curso]=(a[l.curso]||0)+1;return a;},{});
+
+function rows(filter='',sortKey='data'){
+  const f = leads
+    .filter(l => !filter || (l.nome+l.email+l.curso).toLowerCase().includes(filter.toLowerCase()))
+    .sort((a,b) => sortKey==='nome'?a.nome.localeCompare(b.nome):new Date(b.data)-new Date(a.data));
+  if(!f.length) return `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px">Nenhum lead encontrado</td></tr>`;
+  return f.map(l=>`<tr>
+    <td><strong>${l.nome}</strong></td>
+    <td>${l.email}</td>
+    <td>${l.idade} anos</td>
+    <td><span class="badge">${l.curso}</span></td>
+    <td>${new Date(l.data).toLocaleDateString('pt-BR')}</td>
+  </tr>`).join('');
+}
+
+const HTML = `
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">Painel</div>
+    <h1>Painel Administrativo</h1>
+    <p>Visão geral de leads, usuários e estatísticas da plataforma.</p>
+  </div>
+</section>
+<section><div class="container">
+  <div class="dash-grid">
+    <div class="dash-card"><div class="icon"><i class="fa-solid fa-user-plus"></i></div><strong>${leads.length}</strong><span>Leads captados</span></div>
+    <div class="dash-card"><div class="icon"><i class="fa-solid fa-users"></i></div><strong>${users.length}</strong><span>Usuários</span></div>
+    <div class="dash-card"><div class="icon"><i class="fa-solid fa-graduation-cap"></i></div><strong>3</strong><span>Cursos ativos</span></div>
+    <div class="dash-card"><div class="icon"><i class="fa-solid fa-chart-pie"></i></div><strong>${Object.keys(byCurso).length}</strong><span>Cursos com leads</span></div>
+  </div>
+
+  <h2 style="margin:30px 0 16px">Leads por curso</h2>
+  <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+    ${['Técnico em Informática','Técnico em Enfermagem','Técnico em Administração'].map(c=>`
+      <div class="card"><div class="card__body">
+        <h3>${c}</h3>
+        <strong style="font-size:2.2rem;color:var(--primary-dark);display:block;margin:8px 0">${byCurso[c]||0}</strong>
+        <span style="color:var(--muted);font-size:.85rem">leads registrados</span>
+      </div></div>`).join('')}
+  </div>
+
+  <div style="margin:32px 0 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+    <h2>Cadastros recentes</h2>
+    <div style="display:flex;gap:10px">
+      <input id="search" placeholder="Buscar..." style="padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit">
+      <select id="sort" style="padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;background:#fff">
+        <option value="data">Mais recentes</option>
+        <option value="nome">Por nome</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Nome</th><th>E-mail</th><th>Idade</th><th>Curso</th><th>Data</th></tr></thead>
+      <tbody id="leadBody">${rows()}</tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:30px;display:flex;gap:10px">
+    <button class="btn btn-ghost" onclick="localStorage.removeItem('know_user');location.href='index.html'"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+    <button class="btn btn-ghost" onclick="if(confirm('Limpar todos os leads?')){localStorage.removeItem('know_leads');location.reload();}"><i class="fa-solid fa-trash"></i> Limpar leads</button>
+  </div>
+</div></section>
+`;
+
+mountShell('admin.html','Painel Administrativo', HTML);
+
+document.getElementById('search').addEventListener('input', refresh);
+document.getElementById('sort').addEventListener('change', refresh);
+function refresh(){
+  const f = document.getElementById('search').value;
+  const s = document.getElementById('sort').value;
+  document.getElementById('leadBody').innerHTML = rows(f,s);
+}
+</script>
+<script src="js/app.js"></script>
+</body>
+</html>

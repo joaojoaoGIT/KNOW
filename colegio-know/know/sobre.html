@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sobre — Colégio Técnico KNOW</title>
+<meta name="description" content="Conheça a história, missão, visão e valores do Colégio Técnico KNOW.">
+<link rel="icon" href="images/logo-know.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="js/partials.js"></script>
+<script>
+const HTML = `
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Início</a> / Sobre</div>
+    <h1>Sobre o Colégio KNOW</h1>
+    <p>Há 16 anos formando profissionais técnicos prontos para o mercado e para a vida.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="about-grid">
+      <div data-aos="fade-right">
+        <h2>Nossa história</h2>
+        <p style="margin-top:14px">Fundado em 2010, o Colégio Técnico KNOW nasceu da inquietação de educadores que queriam aproximar o ensino técnico das demandas reais do mercado. Hoje, somos referência regional em formação profissional, com mais de 5.000 alunos formados e centenas de empresas parceiras.</p>
+        <div class="slogan">"Conhecimento que transforma, tecnologia que conecta, futuro que acontece."</div>
+        <div class="values">
+          <div class="value"><i class="fa-solid fa-bullseye"></i><strong>Missão</strong><p>Formar profissionais técnicos preparados para o mercado.</p></div>
+          <div class="value"><i class="fa-solid fa-eye"></i><strong>Visão</strong><p>Ser referência nacional em educação técnica até 2030.</p></div>
+          <div class="value"><i class="fa-solid fa-handshake"></i><strong>Valores</strong><p>Ética, inovação, empatia e excelência.</p></div>
+          <div class="value"><i class="fa-solid fa-rocket"></i><strong>Propósito</strong><p>Transformar vidas pela educação técnica de qualidade.</p></div>
+        </div>
+      </div>
+      <div class="about-visual" data-aos="fade-left"><img src="images/aluno-livro.png" alt="Aluno KNOW"></div>
+    </div>
+  </div>
+</section>
+` + renderFooter();
+mountShell('sobre.html','Sobre', HTML);
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
