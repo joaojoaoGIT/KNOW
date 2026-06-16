@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Técnico em Administração — KNOW</title>
+<link rel="icon" href="images/logo-know.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="js/partials.js"></script>
+<script>
+const HTML = `
+<section class="page-hero" style="background:linear-gradient(135deg,#2E24A3,#4033D6),url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600') center/cover;background-blend-mode:multiply">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Início</a> / <a href="cursos.html">Cursos</a> / Administração</div>
+    <h1>Técnico em Administração</h1>
+    <p>Gestão, finanças, marketing e empreendedorismo aplicado.</p>
+    <div style="margin-top:24px"><a href="matriculas.html" class="btn btn-primary"><i class="fa-solid fa-file-signature"></i> Matricule-se</a></div>
+  </div>
+</section>
+<section><div class="container">
+  <div class="section-head"><span class="tag">Conteúdo</span><h2>Pilares da formação</h2></div>
+  <div class="cards">
+    <div class="card"><div class="card__body"><h3><i class="fa-solid fa-chart-line" style="color:var(--primary)"></i> Gestão</h3><p>Planejamento, processos e liderança de equipes.</p></div></div>
+    <div class="card"><div class="card__body"><h3><i class="fa-solid fa-lightbulb" style="color:var(--primary)"></i> Empreendedorismo</h3><p>Da ideia ao negócio com Canvas e MVP.</p></div></div>
+    <div class="card"><div class="card__body"><h3><i class="fa-solid fa-coins" style="color:var(--primary)"></i> Finanças</h3><p>Fluxo de caixa, contabilidade e investimentos.</p></div></div>
+  </div>
+</div></section>
+<section style="background:var(--bg-2)"><div class="container">
+  <div class="section-head"><span class="tag">Carreira</span><h2>Mercado de trabalho</h2></div>
+  <div class="cards">
+    <div class="card"><div class="card__body"><h3>Empresas</h3><p>Setores administrativo, financeiro e RH em organizações de todos os portes.</p></div></div>
+    <div class="card"><div class="card__body"><h3>Comércio e Varejo</h3><p>Gestão de lojas, equipes e operações.</p></div></div>
+    <div class="card"><div class="card__body"><h3>Negócio próprio</h3><p>Empreender com bases sólidas em gestão e finanças.</p></div></div>
+  </div>
+</div></section>
+<section><div class="container">
+  <div class="section-head"><span class="tag">Depoimentos</span><h2>Quem se formou aqui</h2></div>
+  <div class="testi-grid">
+    <div class="testi"><i class="fa-solid fa-quote-left"></i><p>"Aprendi gestão na prática e hoje sou analista em multinacional."</p><div class="testi__author"><img src="https://i.pravatar.cc/100?img=32" alt=""><div><strong>Beatriz L.</strong><small>Renner</small></div></div></div>
+    <div class="testi"><i class="fa-solid fa-quote-left"></i><p>"Abri meu próprio negócio depois do curso."</p><div class="testi__author"><img src="https://i.pravatar.cc/100?img=33" alt=""><div><strong>Diego S.</strong><small>Empreendedor</small></div></div></div>
+    <div class="testi"><i class="fa-solid fa-quote-left"></i><p>"Trabalho com finanças corporativas graças à KNOW."</p><div class="testi__author"><img src="https://i.pravatar.cc/100?img=36" alt=""><div><strong>Larissa F.</strong><small>Analista Financeira</small></div></div></div>
+  </div>
+</div></section>
+` + renderFooter();
+mountShell('cursos.html','Administração', HTML);
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

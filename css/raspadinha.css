@@ -1,0 +1,150 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#3B2FF5;--primary-dark:#2E24A3;--primary-light:#6C63FF;
+  --gold:#F5A623;--gold-light:#FFD77A;
+  --bg:#F4F3FF;--text:#1A1640;--muted:#6B6A8A;--line:#E0DFF5;
+  --radius:16px;--shadow:0 4px 24px rgba(59,47,245,.10);
+}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* HEADER */
+.site-header{background:#fff;border-bottom:1.5px solid var(--line);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--primary-dark)}
+.logo-badge{width:36px;height:36px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.95rem}
+.logo strong{font-size:1.05rem;font-weight:700;color:var(--primary-dark)}
+.header-back{color:var(--muted);font-size:.85rem;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.header-back:hover{color:var(--primary)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary-light) 100%);color:#fff;text-align:center;padding:48px 24px 56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E") repeat}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:18px;position:relative}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;line-height:1.1;position:relative}
+.hero h1 span{color:var(--gold-light)}
+.hero p{margin-top:12px;font-size:1rem;opacity:.85;max-width:480px;margin-inline:auto;position:relative}
+
+/* MAIN */
+main{flex:1;padding:40px 16px 60px;display:flex;flex-direction:column;align-items:center;gap:32px}
+
+/* INSTRUCTION */
+.instruction-box{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:18px 24px;max-width:560px;width:100%;display:flex;align-items:center;gap:14px}
+.instruction-box .icon-wrap{width:44px;height:44px;flex-shrink:0;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.2rem}
+.instruction-box p{font-size:.9rem;color:var(--muted);line-height:1.5}
+.instruction-box strong{color:var(--text)}
+
+/* CARD */
+.scratch-wrapper{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.instruction-box{max-width:620px;margin:0 auto}
+.raspadinha-layout{display:grid;grid-template-columns:1.3fr .75fr;gap:24px;align-items:start;margin-top:26px}
+.scratch-area{min-width:0}
+.result-area{min-width:0}
+.result-panel{max-width:100%;width:100%;}
+.scratch-header{text-align:center;margin-bottom:18px}
+.scratch-header h2{font-size:1.2rem;font-weight:700;color:var(--primary-dark)}
+.scratch-header p{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+/* PILLS */
+.match-strip{display:flex;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.match-pill{background:var(--bg);border:1.5px solid var(--line);border-radius:100px;padding:4px 12px;font-size:.75rem;color:var(--muted);transition:all .35s;display:flex;align-items:center;gap:4px}
+.match-pill.found{background:rgba(59,47,245,.1);border-color:var(--primary);color:var(--primary);font-weight:600}
+.match-pill.winner-pill{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:700;animation:pillPop .5s ease}
+@keyframes pillPop{0%{transform:scale(1)}50%{transform:scale(1.18)}100%{transform:scale(1)}}
+.count-badge{background:var(--primary);color:#fff;border-radius:100px;padding:1px 7px;font-size:.7rem;font-weight:700;min-width:18px;text-align:center;transition:all .3s}
+.match-pill.winner-pill .count-badge{background:rgba(255,255,255,.3)}
+
+/* GRID */
+.scratch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;user-select:none}
+
+/* CELL — prize layer always blurred until fully scratched */
+.scratch-cell{
+  aspect-ratio:1;position:relative;border-radius:14px;
+  overflow:hidden;border:1.5px solid var(--line);
+  cursor:crosshair;background:#fff;
+}
+
+/* prize sits behind canvas, starts heavily blurred */
+.prize-layer{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  background:#fff;z-index:1;
+  /* blur controlled by JS via CSS custom prop */
+  filter:blur(var(--blur, 12px));
+  transition:filter .35s ease;
+}
+.prize-emoji{font-size:clamp(1.5rem,5vw,2rem);line-height:1}
+.prize-label{font-size:clamp(.52rem,.85vw,.68rem);font-weight:600;color:var(--muted);text-align:center;padding:0 4px;line-height:1.2}
+
+/* fully revealed = no blur, golden glow if it's a winner match */
+.scratch-cell.revealed .prize-layer{filter:blur(0)}
+.prize-layer.match-cell{background:linear-gradient(135deg,#FFF8E8,#FFF1C5)}
+.prize-layer.match-cell .prize-label{color:var(--gold)}
+
+/* canvas sits on top */
+.scratch-canvas{
+  position:absolute;inset:0;z-index:2;
+  touch-action:none;
+  /* GPU-composited, no repaint cost */
+  will-change:opacity;
+}
+/* fade canvas out when fully scratched */
+.scratch-cell.revealed .scratch-canvas{
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+/* PROGRESS */
+.progress-wrap{margin-top:20px}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+.progress-track{height:6px;background:var(--line);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:100px;width:0%;transition:width .3s ease}
+
+/* RESULT */
+.result-panel{max-width:560px;width:100%;background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:36px 28px;text-align:center;box-shadow:var(--shadow);display:none;animation:resultIn .5s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes resultIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.result-icon{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 18px;background:linear-gradient(135deg,#FFF8E8,#FFE8A0);border:3px solid var(--gold);animation:iconSpin .6s ease}
+@keyframes iconSpin{from{transform:rotate(-20deg) scale(.7)}to{transform:rotate(0) scale(1)}}
+.result-badge{display:inline-block;background:var(--bg);border:1.5px solid var(--line);border-radius:100px;padding:4px 14px;font-size:.75rem;font-weight:600;color:var(--primary);margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
+.result-panel h2{font-size:1.6rem;font-weight:800;color:var(--primary-dark);line-height:1.15}
+.prize-display{font-size:2rem;margin:14px 0 4px;animation:prizeFloat 2s ease-in-out infinite}
+@keyframes prizeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.prize-name{font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.prize-desc{font-size:.88rem;color:var(--muted);max-width:340px;margin:0 auto 24px;line-height:1.6}
+.no-match-icon{font-size:2.5rem;margin:8px 0}
+.no-match-msg{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:320px;margin-inline:auto}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s}
+.btn-cta:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--primary);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;padding:11px 20px;border-radius:12px;text-decoration:none;border:1.5px solid var(--line);cursor:pointer;transition:all .2s;margin-top:10px}
+.btn-ghost:hover{border-color:var(--primary);background:var(--bg)}
+
+/* WINNER BANNER inline (appears before all cells revealed) */
+.winner-banner{
+  display:none;
+  background:linear-gradient(135deg,#FFF8E8,#FFE8A0);
+  border:2px solid var(--gold);
+  border-radius:14px;
+  padding:14px 18px;
+  text-align:center;
+  margin-top:20px;
+  animation:resultIn .5s cubic-bezier(.175,.885,.32,1.275);
+}
+.winner-banner.show{display:block}
+.winner-banner p{font-size:.9rem;color:#7a5800;font-weight:600}
+.winner-banner strong{font-size:1rem;color:var(--gold)}
+
+/* FOOTER */
+footer{text-align:center;padding:24px;font-size:.8rem;color:var(--muted);border-top:1.5px solid var(--line);background:#fff}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;pointer-events:none;z-index:9999;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(105vh) rotate(720deg)}}
+
+/* DIRT */
+.dirt{position:absolute;border-radius:50%;pointer-events:none;z-index:3;animation:dirtFly .4s ease-out forwards}
+@keyframes dirtFly{0%{opacity:.85;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
+
+@media(max-width:480px){
+  .scratch-wrapper{padding:16px 12px}
+  .result-panel{padding:28px 16px}
+  .site-header{padding:0 16px}
+}

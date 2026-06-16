@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contato — Colégio Técnico KNOW</title>
+<link rel="icon" href="images/logo-know.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="js/partials.js"></script>
+<script>
+const HTML = `
+<section class="page-hero">
+  <div class="container"><div class="breadcrumb"><a href="index.html">Início</a> / Contato</div>
+    <h1>Fale com a KNOW</h1><p>Estamos prontos para te atender.</p>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div><small>Endereço</small><strong>Av. da Inovação, 1024 — Distrito Tech</strong></div></div>
+        <div class="contact-item"><i class="fa-solid fa-phone"></i><div><small>Telefone</small><strong>(51) 3003-KNOW</strong></div></div>
+        <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><small>E-mail</small><strong>matriculas@colegioknow.com.br</strong></div></div>
+        <div class="contact-item"><i class="fa-brands fa-instagram"></i><div><small>Instagram</small><strong>@colegioknowoficial</strong></div></div>
+        <div class="contact-item"><i class="fa-regular fa-clock"></i><div><small>Atendimento</small><strong>Seg a Sex, 8h às 22h</strong></div></div>
+      </div>
+      <form class="form" id="leadForm" novalidate>
+        <h3>Envie sua mensagem</h3>
+        <div class="field" data-field="nome"><label>Nome</label><input name="nome" type="text"><span class="err">Informe seu nome</span></div>
+        <div class="field" data-field="idade"><label>Idade</label><input name="idade" type="number"><span class="err">Idade inválida</span></div>
+        <div class="field" data-field="email"><label>E-mail</label><input name="email" type="email"><span class="err">E-mail inválido</span></div>
+        <div class="field" data-field="curso"><label>Curso de interesse</label>
+          <select name="curso"><option value="">Selecione</option>
+            <option>Técnico em Informática</option><option>Técnico em Enfermagem</option><option>Técnico em Administração</option>
+          </select><span class="err">Selecione um curso</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+      </form>
+    </div>
+  </div>
+</section>
+` + renderFooter();
+mountShell('contato.html','Contato', HTML);
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

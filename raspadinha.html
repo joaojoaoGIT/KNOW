@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raspadinha KNOW — Seu Prêmio Espera!</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/raspadinha.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="js/partials.js"></script>
+<script>
+const HTML = `
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Início</a> / Raspadinha</div>
+    <h1>Raspadinha da Sorte</h1>
+    <p>Raspe os quadrados e encontre 3 prêmios iguais para ganhar seu brinde.</p>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="instruction-box">
+      <div class="icon-wrap"><i class="fa-solid fa-hand-pointer"></i></div>
+      <p><strong>Como jogar:</strong> Raspe cada quadrado até revelar o item. Encontre <strong>3 iguais</strong> e ganhe o prêmio.</p>
+    </div>
+    <div class="raspadinha-layout">
+      <div class="scratch-area">
+        <div class="scratch-wrapper">
+          <div class="scratch-header">
+            <h2>🎟️ Sua raspadinha exclusiva</h2>
+            <p>Toque ou clique e arraste para revelar os quadrados. Cada ganho aparece em tempo real.</p>
+          </div>
+          <div class="match-strip" id="matchStrip"></div>
+          <div class="scratch-grid" id="scratchGrid"></div>
+          <div class="winner-banner" id="winnerBanner">
+            <p>🎉 Você encontrou 3 <strong id="bannerPrize"></strong>! Continue raspando para confirmar seu prêmio.</p>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Progresso</span>
+              <span id="progressText">0 / 9 raspados</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-area">
+        <div class="result-panel" id="resultPanel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+` + renderFooter();
+mountShell('raspadinha.html','Raspadinha da Sorte', HTML);
+</script>
+<script src="js/app.js"></script>
+<script src="js/raspadinha.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — Colégio Técnico KNOW</title>
+<link rel="icon" href="images/logo-know.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-side">
+    <div>
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;color:#fff">
+        <img src="images/logo-know.png" alt="" style="width:44px;height:44px;background:#fff;border-radius:10px;padding:4px">
+        <strong style="font-size:1.15rem">Colégio KNOW</strong>
+      </a>
+    </div>
+    <div>
+      <h2>Bem-vindo(a) à Plataforma KNOW</h2>
+      <p>Acesse sua área do aluno, acompanhe cursos, materiais e certificados em um só lugar.</p>
+    </div>
+    <div style="font-size:.85rem;color:rgba(255,255,255,.7)">© ${new Date().getFullYear()} Colégio Técnico KNOW</div>
+  </div>
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      <h1>Acesse sua conta</h1>
+      <p>Entre ou crie uma conta para começar.</p>
+      <div class="auth-tabs">
+        <button class="active" data-tab="login">Entrar</button>
+        <button data-tab="register">Criar conta</button>
+      </div>
+      <form id="loginForm">
+        <div class="field"><label>Usuário ou e-mail</label><input name="user" type="text" placeholder="admin ou seu@email.com" required></div>
+        <div class="field"><label>Senha</label><input name="pass" type="password" placeholder="••••••••" required></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+        <p style="margin-top:14px;font-size:.82rem;color:var(--muted)">Admin demo: <strong>admin</strong> / <strong>admin123</strong></p>
+      </form>
+      <form id="registerForm" style="display:none">
+        <div class="field"><label>Nome completo</label><input name="name" type="text" required></div>
+        <div class="field"><label>E-mail</label><input name="email" type="email" required></div>
+        <div class="field"><label>Senha</label><input name="pass" type="password" minlength="6" required></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" type="submit"><i class="fa-solid fa-user-plus"></i> Criar conta</button>
+      </form>
+      <p style="margin-top:18px;font-size:.85rem;color:var(--muted)"><a href="index.html" style="color:var(--primary-dark);font-weight:600"><i class="fa-solid fa-arrow-left"></i> Voltar ao site</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+const tabs = document.querySelectorAll('.auth-tabs button');
+tabs.forEach(b => b.addEventListener('click', () => {
+  tabs.forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const t = b.dataset.tab;
+  document.getElementById('loginForm').style.display = t==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = t==='register'?'block':'none';
+}));
+
+document.getElementById('loginForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const user = e.target.user.value.trim();
+  const pass = e.target.pass.value;
+  if(user==='admin' && pass==='admin123'){
+    localStorage.setItem('know_user', JSON.stringify({name:'Administrador KNOW', email:'admin@knowedu.com', role:'admin'}));
+    addNotification({
+      id:'quiz',
+      title:'Quiz Vocacional disponível',
+      message:'Responda o quiz e descubra sua área de interesse.',
+      href:'quiz.html'
+    });
+    addNotification({
+      id:'raspadinha',
+      title:'Raspadinha da Sorte',
+      message:'Raspe 3 itens iguais e ganhe prêmios exclusivos.',
+      href:'raspadinha.html'
+    });
+    toast('Bem-vindo, administrador!');
+    setTimeout(()=>location.href='admin.html',800);
+    return;
+  }
+  const users = JSON.parse(localStorage.getItem('know_users')||'[]');
+  const found = users.find(u => (u.email===user) && u.pass===pass);
+  if(found){
+    localStorage.setItem('know_user', JSON.stringify({name:found.name,email:found.email,role:'aluno'}));
+    addNotification({
+      id:'quiz',
+      title:'Quiz Vocacional disponível',
+      message:'Responda o quiz e descubra sua área de interesse.',
+      href:'quiz.html'
+    });
+    addNotification({
+      id:'raspadinha',
+      title:'Raspadinha da Sorte',
+      message:'Raspe 3 itens iguais e ganhe prêmios exclusivos.',
+      href:'raspadinha.html'
+    });
+    toast('Login realizado!');
+    setTimeout(()=>location.href='area-aluno.html',800);
+  } else {
+    toast('Credenciais inválidas','error');
+  }
+});
+
+document.getElementById('registerForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = e.target.name.value.trim();
+  const email = e.target.email.value.trim();
+  const pass = e.target.pass.value;
+  const users = JSON.parse(localStorage.getItem('know_users')||'[]');
+  if(users.find(u=>u.email===email)){ toast('E-mail já cadastrado','error'); return; }
+  users.push({name,email,pass,createdAt:new Date().toISOString()});
+  localStorage.setItem('know_users', JSON.stringify(users));
+  localStorage.setItem('know_user', JSON.stringify({name,email,role:'aluno'}));
+  addLead({
+    id: Date.now(),
+    nome: name,
+    idade: 0,
+    email,
+    curso: 'Cadastro KNOW',
+    data: new Date().toISOString()
+  });
+  addNotification({
+    id:'quiz',
+    title:'Quiz Vocacional disponível',
+    message:'Responda o quiz e descubra sua área de interesse.',
+    href:'quiz.html'
+  });
+  addNotification({
+    id:'raspadinha',
+    title:'Raspadinha da Sorte',
+    message:'Raspe 3 itens iguais e ganhe prêmios exclusivos.',
+    href:'raspadinha.html'
+  });
+  toast('Conta criada com sucesso!');
+  setTimeout(()=>location.href='area-aluno.html',800);
+});
+</script>
+</body>
+</html>
