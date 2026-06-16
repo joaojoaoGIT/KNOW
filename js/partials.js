@@ -105,6 +105,11 @@ function renderFooter(){
           <a href="curso-administracao.html">Administração</a>
         </div>
         <div>
+          <h4>Ferramentas</h4>
+          <a href="https://squoosh.app" target="_blank" rel="noopener">Squoosh (otimização/resize)</a>
+          <a href="https://colab.research.google.com/github/xinntao/Real-ESRGAN/blob/master/colab/Real-ESRGAN.ipynb" target="_blank" rel="noopener">Real-ESRGAN (Google Colab)</a>
+        </div>
+        <div>
           <h4>Contato</h4>
           <a href="#"><i class="fa-solid fa-location-dot"></i> Av. da Inovação, 1024</a>
           <a href="#"><i class="fa-solid fa-phone"></i> (51) 3003-KNOW</a>
