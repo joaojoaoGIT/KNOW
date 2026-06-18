@@ -105,16 +105,19 @@ Não é necessário instalar programas ou bibliotecas adicionais.
 # 📸 Demonstração
 
 ### 🏠 Página Inicial
-Adicione aqui uma captura da Home.
+<img width="1898" height="901" alt="image" src="https://github.com/user-attachments/assets/4438f28b-e4a7-45be-9d75-e7dc57824e53" />
+
 
 ### 📚 Página de Cursos
-Adicione aqui uma captura dos cursos.
+<img width="1894" height="906" alt="image" src="https://github.com/user-attachments/assets/3038c9bc-2275-4d59-9e65-c469ef0d56a5" />
 
 ### 🎓 Área do Aluno
-Adicione aqui uma captura da área do aluno.
+<img width="1877" height="905" alt="image" src="https://github.com/user-attachments/assets/e3d88faf-fd3e-4611-bec7-ab5ddea3cef5" />
+
 
 ### ⚙️ Painel Administrativo
-Adicione aqui uma captura do painel administrativo.
+<img width="1894" height="885" alt="image" src="https://github.com/user-attachments/assets/f378dcaa-9704-47a4-bcab-31f0e53b5abb" />
+
 
 ---
 
