@@ -55,7 +55,7 @@ function renderShell(activePage, headerTitle){
         <div class="header__title">${headerTitle||''}</div>
       </div>
       <div class="header__actions">
-        <button class="icon-btn" id="notificationToggle" aria-label="Notificações">
+        <button class="icon-btn notification-btn" id="notificationToggle" aria-label="Notificações">
           <i class="fa-regular fa-bell"></i>
           <span class="bell-badge" id="notificationBadge"></span>
         </button>

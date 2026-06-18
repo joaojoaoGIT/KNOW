@@ -122,7 +122,7 @@ p{color:var(--muted)}
 
 .notification-btn{position:relative}
 .bell-badge{
-  position:absolute;top:8px;right:8px;
+  position:absolute;top:4px;right:4px;
   width:10px;height:10px;border-radius:50%;
   background:#ff3860;box-shadow:0 0 0 4px rgba(255,56,96,.18);
   display:none;
@@ -219,11 +219,12 @@ p{color:var(--muted)}
 
 /* Hero responsiveness */
 @media (max-width: 992px){
+  .hero{background-image: linear-gradient(rgba(31,25,101,.65), rgba(44,35,143,.55)), url('../images/bginicial-celular.png');background-position:center top;background-size:cover}
   .hero .container{margin-left:32px}
   .hero__inner{padding:64px 24px}
 }
 @media (max-width: 768px){
-  .hero{background-position:center;background-size:cover}
+  .hero{background-image: linear-gradient(rgba(31,25,101,.65), rgba(44,35,143,.55)), url('../images/bginicial-celular.png');background-position:center top;background-size:cover;min-height:auto;overflow:visible}
   .hero .container{margin-left:18px;padding-right:18px}
   .hero__inner{padding:40px 16px;max-width:94%}
   .hero h1{font-size:clamp(1.6rem,6vw,2.2rem)}
@@ -231,6 +232,7 @@ p{color:var(--muted)}
   .hero__meta{margin-top:28px;gap:16px;padding-top:18px}
 }
 @media (max-width:420px){
+  .hero{min-height:auto}
   .hero__inner{padding:28px 14px}
   .hero h1{font-size:1.5rem}
 }
@@ -540,6 +542,8 @@ tbody tr:hover{background:var(--bg-1)}
   .hero__meta{gap:20px}
   .cards,.testi-grid,.steps,.stats-grid,.footer-grid{grid-template-columns:1fr}
   .footer-grid{gap:28px}
+  .sidebar__brand-text{display:none}
+  .sidebar__brand img{width:36px;height:36px}
 }
 @media (max-width:520px){
   .dash-grid{grid-template-columns:1fr}
